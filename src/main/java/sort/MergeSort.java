@@ -1,7 +1,5 @@
 package sort;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Created by Michael on 19/9/16.
  */
