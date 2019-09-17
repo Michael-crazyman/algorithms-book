@@ -1,15 +1,12 @@
 package sort;
 
-/**
- * Created by Michael on 19/9/16.
- */
 public class MergeSort {
 
-    public static void mergeSort(int[] arr) throws InterruptedException {
+    public static void mergeSort(int[] arr) {
         mergeSort(arr, 0, arr.length - 1);
     }
 
-    public static void mergeSort(int[] arr, int left, int right) throws InterruptedException {
+    public static void mergeSort(int[] arr, int left, int right) {
         System.out.println("left = "+ left + ", right = "+ right);
         if (left  == right) {
             return;
@@ -18,12 +15,7 @@ public class MergeSort {
         System.out.println("mid = " + mid);
 
         mergeSort(arr, left, mid);
-        System.out.println("Left completed!");
-        System.out.println(arr[left]);
-
         mergeSort(arr, mid + 1, right);
-        System.out.println("Right completed!");
-        System.out.println(arr[right]);
 
         merge(arr, left, mid, right);
     }
@@ -63,7 +55,7 @@ public class MergeSort {
         System.out.println();
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         int[] arr = {6,7,5,4,1,9,0,8,3};
         mergeSort(arr);
         print(arr);
