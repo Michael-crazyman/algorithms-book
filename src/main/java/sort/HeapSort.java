@@ -11,7 +11,7 @@ public class HeapSort {
             heapInsert(arr, i);
         }
         int heapSize = arr.length;
-        swap(arr, 0, --heapSize);//FIXME why here is always 0
+        swap(arr, 0, --heapSize);
         while (heapSize > 0) {
             heapify(arr, 0, heapSize);
             swap(arr, 0, --heapSize);
@@ -20,7 +20,7 @@ public class HeapSort {
 
     public static void heapInsert(int[] arr, int index) {
         while (arr[index] > arr[(index - 1) / 2]) {
-            swap(arr, (index - 1) / 2, index);
+            swap(arr, index, (index - 1) / 2);
             index = (index - 1) / 2;
         }
     }
@@ -29,10 +29,10 @@ public class HeapSort {
         int left = currentIndex * 2 + 1;
 
         while (left < size) {
-            int largestIndex = left + 1 < size && arr[left] > arr[left + 1] ? left : left + 1;
+            int largestIndex = (left + 1) < size && (arr[left] > arr[left + 1]) ? left : (left + 1);
             largestIndex = arr[largestIndex] > arr[currentIndex] ? largestIndex : currentIndex;
 
-            if (largestIndex == currentIndex) {//FIXME I don't understand why we break
+            if (largestIndex == currentIndex) {
                 break;
             }
             swap(arr, largestIndex, currentIndex);
@@ -56,7 +56,7 @@ public class HeapSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = {10, 8, 11, 6, 1, 2, 5};
+        int[] arr = {10, 8, 11};
 
         heapSort(arr);
         print(arr);
