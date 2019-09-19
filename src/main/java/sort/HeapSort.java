@@ -29,7 +29,7 @@ public class HeapSort {
         int left = currentIndex * 2 + 1;
 
         while (left < size) {
-            int largestIndex = (left + 1) < size && (arr[left] > arr[left + 1]) ? left : (left + 1);
+            int largestIndex = (left + 1) < size && (arr[left + 1] > arr[left]) ? left + 1 : left;
             largestIndex = arr[largestIndex] > arr[currentIndex] ? largestIndex : currentIndex;
 
             if (largestIndex == currentIndex) {
@@ -56,7 +56,7 @@ public class HeapSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = {10, 8, 11};
+        int[] arr = {10, 8, 11, 9,3,5};
 
         heapSort(arr);
         print(arr);
