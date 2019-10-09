@@ -22,7 +22,7 @@ public class RomanToInteger {
             int b;
             if (c == 'I' && ((i + 1) <  s.length()) && (s.charAt( i + 1) == 'V' || s.charAt(i + 1) == 'X')) {
                 b = exchange(s.charAt(i + 1)) - 1;
-                i++;
+                i ++;
             }else if (c == 'X' && ((i + 1) <  s.length()) && (s.charAt( i + 1) == 'L' || s.charAt(i + 1) == 'C')) {
                 b = exchange(s.charAt(i + 1)) - 10;
                 i ++;
