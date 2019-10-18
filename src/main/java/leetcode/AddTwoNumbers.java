@@ -18,28 +18,34 @@ public class AddTwoNumbers {
         }
 
         int carryOn = 0;
-        int newVal = l1.val + l2.val;
-        l1 = l1.next;
-        l2 = l2.next;
-
-        ListNode currentNewNode;
-        ListNode newHead;
-
-        if (newVal >= 10) {
-            carryOn = 1;
-            newVal = newVal % 10;
-            newHead = new ListNode(newVal);
-            currentNewNode = newHead;
-            currentNewNode.next = new ListNode(carryOn);
-            currentNewNode = currentNewNode.next;
-        } else {
-            newHead = new ListNode(newVal);
-            currentNewNode = newHead;
-        }
+        ListNode newHead = null;
+        ListNode currentNewNode = null;
+        boolean firstTime = true;
 
         while(l1 != null && l2 != null){
-            newVal = l1.val + l2.val + carryOn;
+            int newVal = l1.val + l2.val + carryOn;
 
+            if (newVal >= 10) {
+                newVal = newVal % 10;
+                carryOn = 1;
+            } else {
+                carryOn = 0;
+            }
+            if (firstTime) {
+                newHead = new ListNode(newVal);
+                currentNewNode = newHead;
+                firstTime = false;
+            }else{
+                currentNewNode.next = new ListNode(newVal);
+                currentNewNode = currentNewNode.next;
+            }
+
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+
+        while(l1 != null){
+            int newVal = l1.val + carryOn;
             if (newVal >= 10) {
                 newVal = newVal % 10;
                 carryOn = 1;
@@ -49,21 +55,25 @@ public class AddTwoNumbers {
 
             currentNewNode.next = new ListNode(newVal);
             currentNewNode = currentNewNode.next;
-
-            l1 = l1.next;
-            l2 = l2.next;
-        }
-
-        while(l1 != null){
-            currentNewNode.next = new ListNode(l1.val + carryOn);
-            currentNewNode = currentNewNode.next;
             l1 = l1.next;
         }
 
         while(l2 != null){
-            currentNewNode.next = new ListNode(l2.val + carryOn);
+            int newVal = l2.val + carryOn;
+            if (newVal >= 10) {
+                newVal = newVal % 10;
+                carryOn = 1;
+            } else {
+                carryOn = 0;
+            }
+
+            currentNewNode.next = new ListNode(newVal);
             currentNewNode = currentNewNode.next;
             l2 = l2.next;
+        }
+
+        if (carryOn > 0) {
+            currentNewNode.next = new ListNode(carryOn);
         }
 
         return newHead;
@@ -125,6 +135,17 @@ public class AddTwoNumbers {
         printLinkedList(addTwoNumbers(l1, ll1));
     }
 
+    private static void test5(){
+        ListNode l1 = new ListNode(1);
+
+        ListNode ll1 = new ListNode(9);
+        ListNode ll2 = new ListNode(9);
+
+        ll1.next = ll2;
+
+        printLinkedList(addTwoNumbers(l1, ll1));
+    }
+
     private static void printLinkedList(ListNode l){
         while(l != null){
             System.out.print(l.val + " ");
@@ -134,9 +155,10 @@ public class AddTwoNumbers {
     }
 
     public static void main(String[] args) {
-        //test1();
+//        test1();
 //        test2();
 //        test3();
-        test4();
+//        test4();
+        test5();
     }
 }
