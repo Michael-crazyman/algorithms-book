@@ -18,14 +18,31 @@ public class BinaryTreeLevelOrder {
 
     public static List<List<Integer>> levelOrder(TreeNode root){
         if (root == null) {
-            return null;
+            return new ArrayList<>();
         }
 
         List<List<Integer>> result = new ArrayList<>();
         LinkedList<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while (!queue.isEmpty()) {
 
+        while (!queue.isEmpty()) {
+            List<Integer> currentLevel = new ArrayList<>();
+            LinkedList<TreeNode> temp = new LinkedList<>();
+            while (!queue.isEmpty()) {
+                TreeNode t = queue.poll();
+                currentLevel.add(t.val);
+
+                if (t.left != null) {
+                    temp.offer(t.left);
+                }
+
+                if (t.right != null) {
+                    temp.offer(t.right);
+                }
+            }
+
+            result.add(currentLevel);
+            queue = temp;
         }
 
         return result;
@@ -48,8 +65,20 @@ public class BinaryTreeLevelOrder {
         TreeNode ll2 = new TreeNode(6);
         TreeNode rr2 = new TreeNode(7);
 
-        rr1.left = ll2;
-        rr1.right = rr2;
+        r1.left = ll2;
+        r1.right = rr2;
+
+        TreeNode lll1 = new TreeNode(8);
+        TreeNode rrr1 = new TreeNode(9);
+
+        ll2.left = lll1;
+        ll2.right = rrr1;
+
+        TreeNode lll2 = new TreeNode(10);
+        TreeNode rrr2 = new TreeNode(11);
+
+        rr2.left = lll2;
+        rr2.right = rrr2;
 
         printNestedList(levelOrder(root));
     }
